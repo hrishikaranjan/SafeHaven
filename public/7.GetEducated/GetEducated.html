@@ -193,7 +193,12 @@ to{opacity:1;transform:translateY(0);}
 <option value="fire">Fire</option>
 <option value="wildfire">Wildfire</option>
 <option value="hurricane">Hurricane</option>
+<option value="volcano">Volcano</option>
+<option value="terrorism">Terrorism</option>
+<option value="tsunami">Tsunami</option>
+<option value="landslide">Landslide</option>
 </select>
+
 
 <div id="checklistResult" class="result-box"></div>
 </div>
@@ -263,7 +268,31 @@ earthquake:{dos:["Drop Cover Hold","Stay away from windows","Move open area"],do
 flood:{dos:["Move higher ground","Switch off electricity"],donts:["Do not walk water"],kit:["Dry food","Water","Medicines"]},
 fire:{dos:["Use stairs","Call emergency"],donts:["Do not use lift"],kit:["Extinguisher","Mask"]},
 wildfire:{dos:["Evacuate early","Wear mask"],donts:["Do not stay"],kit:["Water","Mask"]},
-hurricane:{dos:["Stay indoors","Secure windows"],donts:["Do not go near sea"],kit:["Food","Radio","Water"]}
+hurricane:{dos:["Stay indoors","Secure windows"],donts:["Do not go near sea"],kit:["Food","Radio","Water"]},
+volcano:{
+dos:["Wear mask","Move to safe zone","Stay indoors"],
+donts:["Do not go near lava"],
+kit:["Mask","Water","Goggles"]
+},
+
+terrorism:{
+dos:["Stay alert","Follow authorities","Find safe shelter"],
+donts:["Do not panic","Do not spread rumors"],
+kit:["Phone","Emergency contacts","First aid"]
+},
+
+tsunami:{
+dos:["Move to higher ground","Stay away from coast"],
+donts:["Do not go near sea"],
+kit:["Water","Food","Torch"]
+},
+
+landslide:{
+dos:["Move away from slopes","Stay alert"],
+donts:["Do not stay near cliffs"],
+kit:["Emergency bag","Water","First aid"]
+},
+
 };
 
 document.getElementById("disasterSelect").addEventListener("change",function(){
