@@ -13,14 +13,30 @@ app.use(cors({
 }));
 app.use(express.json());
 
+// Serve static files from public directory
+app.use(express.static('public'));
+
 // OpenAI client
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+let openai;
+try {
+  if (process.env.OPENAI_API_KEY) {
+    openai = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
+  }
+} catch (error) {
+  console.log('OpenAI not configured, chatbot API will be unavailable');
+}
 
 // Chatbot endpoint
 app.post('/chatbot', async (req, res) => {
   try {
+    if (!openai) {
+      return res.status(503).json({
+        text: 'Chatbot service is currently unavailable.'
+      });
+    }
+
     const { conversation } = req.body;
 
     // Validate conversation
@@ -52,7 +68,7 @@ IMPORTANT BEHAVIOR RULES:
 • If user says "help", treat it as an emergency situation
 • If user says "alerts", guide them to Alerts & Risks on SafeHaven
 • If user says "evacuation", guide them to Evacuation & Safety
-• If user says "donation", explain SafeHaven’s donation process
+• If user says "donation", explain SafeHaven's donation process
 • Do NOT act as a general-purpose AI
 • Do NOT give medical or legal advice
 • Do NOT ask follow-up questions unless absolutely required
@@ -88,7 +104,6 @@ COMMUNITY PAGE:
 • Encourage responsible and accurate information sharing
 `;
 
-    
     const completion = await openai.chat.completions.create({
       model: 'gpt-4.1-mini',
       messages: [
